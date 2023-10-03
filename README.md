@@ -11,9 +11,12 @@ My setup mostly relies on [this](https://www.rustimation.eu/index.php/reverse-ss
 There is just a small mistake: To make the reverse SSH Tunnel accessible from any device, a '*' must be added to the command:
 ```ssh -fN -R *:2200:localhost:22 user@gateway```
 
+~~For additional access an extra user is created on the gateway server without shell access, following [this tutorial](https://di-marco.net/blog/it/2021-12-24-tips-how_to_disable_shell_access_to_user_account_in_linux/).~~
+*This does not work*
+
 # HTTP Setup
 Since getting a SSL-Certificate on my raspberry by using Let's encrypt can raise issues, when it is running behind a proxy, I choose to let my Gateway-Server handle the SSL-Encryption.
 The connection between my gateway and pi is encrypted by SSH anyway.
 By using this setup I do not have to worry about expiration of the pi certificates, when it is offline for several month, since my server is online 24/7.
 I choose a subdomain ```pi.gateway``` which will be forwarded to my pi, containing the path.
-This way, I can easily add Sub-Subdomains in the nginx conf on my pi and do not have to touch my gateways nginx config.
+This way, I can easily add Sub-Subdomains in the nginx conf on my pi and do not have to touch my [gateways nginx config](https://github.com/guerkchen/pi-reverseproxy/blob/main/gateway-nginx-conf).
