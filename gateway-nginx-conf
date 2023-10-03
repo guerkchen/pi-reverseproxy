@@ -1,0 +1,17 @@
+server {
+        server_name pi.gateway;
+
+        # SSL
+        listen 443 ssl;
+        listen [::]:443;
+
+        ssl on;
+        ssl_certificate /etc/letsencrypt/live/saa.gateway/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/saa.gateway/privkey.pem;
+
+        location / {
+                proxy_pass http://localhost:2280;
+                proxy_set_header Host $host;
+                proxy_redirect off;
+        }
+}
